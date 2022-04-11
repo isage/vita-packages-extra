@@ -1,0 +1,25 @@
+pkgname=gl4es4vita
+pkgver=1.1.4
+pkgrel=1
+url='https://github.com/SonicMastr/gl4es4vita'
+source=(
+  "https://github.com/SonicMastr/gl4es4vita/releases/download/v${pkgver}-vita/include.zip"
+  "https://github.com/SonicMastr/gl4es4vita/releases/download/v${pkgver}-vita/vitasdk_stubs.zip"
+  "https://github.com/SonicMastr/gl4es4vita/releases/download/v${pkgver}-vita/PSVita_Release.zip"
+ )
+sha256sums=(
+  fe9b227aca18c3214ec0922e3108c7c412fea95db5ce202e3a3c061c68d7e7c1
+  13d70e75b2508db5b4ac93dfb4da5cf387d8ef5b63268d4ef22b3271c0f3d4c4
+  aa0444263d5ac7006c11174034f85651fbad0aec358c0a16b525335ad9fe3953
+)
+
+package () {
+
+    install *.h -D -t $pkgdir$prefix/include/
+    install GL/*.h -D -t $pkgdir$prefix/include/GL/
+    install GL/internal/*.h -D -t $pkgdir$prefix/include/GL/internal/
+
+    install liblib*.a -D -t $pkgdir$prefix/lib/
+    install *.suprx -D -t $pkgdir$prefix/modules/
+
+}

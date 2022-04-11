@@ -1,0 +1,32 @@
+pkgname=sdl2-pvr
+pkgver=2.0.21
+pkgrel=1
+gitrev=b75996138a7f694fd9e578aad66ace9d177dec51
+url='https://www.libsdl.org'
+source=(
+  "https://github.com/libsdl-org/SDL/archive/${gitrev}.tar.gz"
+ )
+sha256sums=(
+  SKIP
+)
+depends=(
+    'pvr_psp2'
+    'gl4es4vita'
+)
+
+prepare() {
+  cd "SDL-${gitrev}"
+}
+
+build() {
+  cd "SDL-${gitrev}"
+  mkdir build && cd build
+  cmake .. -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake -DCMAKE_INSTALL_PREFIX=$prefix -DVIDEO_VITA_PVR=On
+  make -j$(nproc)
+}
+
+package () {
+  cd "SDL-${gitrev}"
+  cd build
+  make DESTDIR=$pkgdir install
+}

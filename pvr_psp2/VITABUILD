@@ -1,0 +1,34 @@
+pkgname=pvr_psp2
+pkgver=3.7
+pkgrel=1
+url='https://github.com/GrapheneCt/PVR_PSP2/'
+source=(
+  "https://github.com/GrapheneCt/PVR_PSP2/archive/refs/tags/v${pkgver}.tar.gz"
+  "https://github.com/GrapheneCt/PVR_PSP2/releases/download/v${pkgver}/vitasdk_stubs.zip"
+  "https://github.com/GrapheneCt/PVR_PSP2/releases/download/v${pkgver}/PSVita_Release.zip"
+ )
+sha256sums=(
+  SKIP
+  2783825bff4e2c948a024864bdca107787f010729dda4a9e54ce010008ad939e
+  bc28703151c51b8b929dade1a04dcf27a9f3dd8971a9f10d5b9fe5e5f611c25d
+)
+
+package () {
+    for i in *vitasdk.*/*
+    do
+        install $i -D -t $pkgdir$prefix/lib -D 
+    done
+
+    for i in *.suprx
+    do
+        install  $i -D -t $pkgdir$prefix/modules
+    done
+
+    cd PVR_PSP2-${pkgver}
+
+    install include/EGL/*.h   -D -t $pkgdir$prefix/include/EGL/
+    install include/GLES/*.h  -D -t $pkgdir$prefix/include/GLES/
+    install include/GLES2/*.h -D -t $pkgdir$prefix/include/GLES2/
+    install include/KHR/*.h   -D -t $pkgdir$prefix/include/KHR/
+    install include/gpu_es4/psp2_pvr_hint.h -D -t $pkgdir$prefix/include/gpu_es4/
+}
