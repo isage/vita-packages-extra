@@ -1,0 +1,34 @@
+pkgname=php
+pkgver=8.1.7
+pkgrel=1
+gitrev=800d4cf45f11f5fedc5cbe4e56b326411e5a8981
+url='https://www.php.net/'
+source=(
+  "https://github.com/isage/php-src/archive/${gitrev}.tar.gz"
+ )
+sha256sums=(
+  SKIP
+)
+depends=(
+    'sdl'
+    'sdl2_mixer'
+    'sdl2_image'
+)
+
+prepare () {
+  cd "${pkgname}-src-${gitrev}"
+  ./buildconf --force
+}
+
+build() {
+  cd "${pkgname}-src-${gitrev}"
+  PATH="$VITASDK/arm-vita-eabi/bin:$PATH" \
+  LIBS="-ljpeg -lpng -lwebp -lmikmod -lmpg123 -lmodplug -lFLAC -lopusfile -lopus -lvorbisfile -lvorbis -logg -pthread -lz -lstdc++ -lc -lm" \
+  ./configure --host=arm-vita-eabi --prefix=$prefix --without-pdo-sqlite --without-sqlite3 --disable-all --disable-cgi --without-pcre-jit --disable-phpdbg --enable-embed=static --with-sdl=${VITASDK}/arm-vita-eabi/bin/sdl2-config --without-pic --enable-sdl_mixer --enable-sdl_image
+  make -j$(nproc)
+}
+
+package () {
+  cd "${pkgname}-src-${gitrev}"
+  make INSTALL_ROOT=$pkgdir install
+}
