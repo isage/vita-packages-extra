@@ -9,4 +9,4 @@ All extra/staging/gray-area shit for ease of building/installing.
 
 # building/installing
 
-Run `vota-makepkg` in respective directory to build. run `vdpm *-arm.tar.xz` to install
+Run `vita-makepkg` in respective directory to build. run `vdpm *-arm.tar.xz` to install
