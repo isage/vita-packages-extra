@@ -6,6 +6,7 @@ All extra/staging/gray-area shit for ease of building/installing.
 * gl4es - gl to gles2 translation
 * sdl2_pvr - sdl2 with gl/gles/gles2 support via pvr_psp2 and gl4es
 * php - embed php port
+* vitausb - SCeUsbd and SceUsbServ headers/stubs
 
 # building/installing
 

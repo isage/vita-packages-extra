@@ -1,0 +1,22 @@
+pkgname=vitausb
+pkgver=9999
+pkgrel=1
+url='https://github.com/isage/vitausb/'
+
+source=(
+  https://github.com/isage/vitausb/archive/refs/heads/master.tar.gz
+)
+
+sha256sums=(
+  SKIP
+)
+
+build() {
+  cd vitausb-master
+  make
+}
+
+package () {
+  cd vitausb-master
+  make DESTDIR=${pkgdir} install
+}
