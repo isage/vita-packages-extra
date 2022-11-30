@@ -1,7 +1,7 @@
 pkgname=sdl2-pvr
-pkgver=2.0.22
+pkgver=2.26.0
 pkgrel=1
-gitrev=ea152532204a4f5d9d4ccde173f2532a80493ad8
+gitrev=0bfeed061b10ea7dd37c88d9bae1824bad760f3a
 url='https://www.libsdl.org'
 source=(
   "https://github.com/libsdl-org/SDL/archive/${gitrev}.tar.gz"
