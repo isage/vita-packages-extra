@@ -1,5 +1,5 @@
 pkgname=sdl2-pvr
-pkgver=2.26.0
+pkgver=2.30.10
 pkgrel=1
 gitrev=0bfeed061b10ea7dd37c88d9bae1824bad760f3a
 url='https://www.libsdl.org'
