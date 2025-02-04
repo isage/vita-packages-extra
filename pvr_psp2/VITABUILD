@@ -1,5 +1,5 @@
 pkgname=pvr_psp2
-pkgver=3.8
+pkgver=3.9
 pkgrel=1
 url='https://github.com/GrapheneCt/PVR_PSP2/'
 source=(
@@ -10,7 +10,7 @@ source=(
 sha256sums=(
   SKIP
   7ee2498b58cb97871fcb0e3e134ce1045acf2c22ce4873b1844a391b5da4fe47
-  03c44fa33355970eac52e7dd7d88ac31378df7979406291a6aaca56e1275a4ce
+  ed69be89f21c4894e8009a8c3567c89b1778c8db0beb3c2f4ea134adab4c494f
 )
 
 package () {
