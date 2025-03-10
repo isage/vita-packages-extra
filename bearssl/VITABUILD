@@ -1,0 +1,26 @@
+pkgname=bearssl
+pkgver=0.6
+pkgrel=1
+url="https://curl.se/"
+source=("https://bearssl.org/bearssl-${pkgver}.tar.gz" "vita.mk")
+sha256sums=('6705bba1714961b41a728dfc5debbe348d2966c117649392f8c8139efc83ff14' '859c07bf417e7481d91aa1cb8f252476bdc93cf21dc578fe23ee23b77c5a4bf0')
+license=('MIT')
+
+prepare() {
+  cd bearssl-${pkgver}
+  cp ../vita.mk conf
+}
+
+build() {
+  cd bearssl-${pkgver}
+  make CONF=vita -j$(nproc)
+}
+
+package () {
+  cd bearssl-${pkgver}
+
+  mkdir -p $pkgdir/$VITASDK/arm-vita-eabi/lib
+  mkdir -p $pkgdir/$VITASDK/arm-vita-eabi/include
+  cp vita/lib$pkgname.a $pkgdir/$VITASDK/arm-vita-eabi/lib/
+  cp inc/*.h $pkgdir/$VITASDK/arm-vita-eabi/include/
+}
