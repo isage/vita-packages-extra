@@ -8,6 +8,8 @@ All extra/staging/gray-area shit for ease of building/installing.
 * php - embed php port
 * vitausb - SCeUsbd and SceUsbServ headers/stubs
 * curl-mbedtls - curl built with mbedtls backend
+* curl-bearssl - curl built with bearssl backend
+* bearssl - bearssl ssl/tls library
 
 # building/installing
 
