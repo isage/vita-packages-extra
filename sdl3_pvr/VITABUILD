@@ -1,0 +1,34 @@
+pkgname=sdl3-pvr
+pkgver=3.2.8
+pkgrel=1
+url='https://www.libsdl.org'
+source=(
+  "https://github.com/libsdl-org/SDL/releases/download/release-${pkgver}/SDL3-${pkgver}.tar.gz"
+  "headers.patch"
+ )
+sha256sums=(
+  13388fabb361de768ecdf2b65e52bb27d1054cae6ccb6942ba926e378e00db03
+  222d461a1a941645dc544ae90ddeb91ad59a5876625cd5aee1c6fa92bcbe8c2e
+)
+depends=(
+    'pvr_psp2'
+    'gl4es4vita'
+)
+
+prepare() {
+  cd "SDL3-${pkgver}"
+  patch -p1 < ../headers.patch
+}
+
+build() {
+  cd "SDL3-${pkgver}"
+  mkdir build && cd build
+  cmake .. -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake -DCMAKE_INSTALL_PREFIX=$prefix -DVIDEO_VITA_PVR=ON
+  make -j$(nproc)
+}
+
+package () {
+  cd "SDL3-${pkgver}"
+  cd build
+  make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,55 @@
+diff --git a/src/video/vita/SDL_vitagl_pvr.c b/src/video/vita/SDL_vitagl_pvr.c
+index 1255e4e9d..c5d7df339 100644
+--- a/src/video/vita/SDL_vitagl_pvr.c
++++ b/src/video/vita/SDL_vitagl_pvr.c
+@@ -29,7 +29,6 @@
+ 
+ #include "SDL_vitavideo.h"
+ #include "../SDL_egl_c.h"
+-#include "SDL_vitagl_pvr_c.h"
+ 
+ #define MAX_PATH 256 // vita limits are somehow wrong
+ 
+diff --git a/src/video/vita/SDL_vitagles.c b/src/video/vita/SDL_vitagles.c
+index 2c7444781..d3fcd6ad3 100644
+--- a/src/video/vita/SDL_vitagles.c
++++ b/src/video/vita/SDL_vitagles.c
+@@ -25,7 +25,6 @@
+ #include <string.h>
+ 
+ #include "SDL_vitavideo.h"
+-#include "SDL_vitagles_c.h"
+ 
+ /*****************************************************************************/
+ // SDL OpenGL/OpenGL ES functions
+diff --git a/src/video/vita/SDL_vitagles_pvr.c b/src/video/vita/SDL_vitagles_pvr.c
+index 4ba0573dc..bf4721e3a 100644
+--- a/src/video/vita/SDL_vitagles_pvr.c
++++ b/src/video/vita/SDL_vitagles_pvr.c
+@@ -28,7 +28,6 @@
+ 
+ #include "SDL_vitavideo.h"
+ #include "../SDL_egl_c.h"
+-#include "SDL_vitagles_pvr_c.h"
+ 
+ #define MAX_PATH 256 // vita limits are somehow wrong
+ 
+diff --git a/src/video/vita/SDL_vitavideo.c b/src/video/vita/SDL_vitavideo.c
+index 6b5dbd78d..a4e6ca3f2 100644
+--- a/src/video/vita/SDL_vitavideo.c
++++ b/src/video/vita/SDL_vitavideo.c
+@@ -37,13 +37,7 @@
+ #include "SDL_vitaframebuffer.h"
+ #include "SDL_vitamessagebox.h"
+ 
+-#ifdef SDL_VIDEO_VITA_PIB
+-#include "SDL_vitagles_c.h"
+-#elif defined(SDL_VIDEO_VITA_PVR)
+-#include "SDL_vitagles_pvr_c.h"
+-#ifdef SDL_VIDEO_VITA_PVR_OGL
+-#include "SDL_vitagl_pvr_c.h"
+-#endif
++#if defined(SDL_VIDEO_VITA_PVR)
+ #define VITA_GLES_GetProcAddress  SDL_EGL_GetProcAddressInternal
+ #define VITA_GLES_UnloadLibrary   SDL_EGL_UnloadLibrary
+ #define VITA_GLES_SetSwapInterval SDL_EGL_SetSwapInterval

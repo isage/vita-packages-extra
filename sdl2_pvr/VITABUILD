@@ -1,13 +1,12 @@
 pkgname=sdl2-pvr
-pkgver=2.30.10
+pkgver=2.32.2
 pkgrel=1
-gitrev=0bfeed061b10ea7dd37c88d9bae1824bad760f3a
 url='https://www.libsdl.org'
 source=(
-  "https://github.com/libsdl-org/SDL/archive/${gitrev}.tar.gz"
+  "https://github.com/libsdl-org/SDL/releases/download/release-${pkgver}/SDL2-${pkgver}.tar.gz"
  )
 sha256sums=(
-  SKIP
+  c5f30c427fd8107ee4a400c84d4447dd211352512eaf0b6e89cc6a50a2821922
 )
 depends=(
     'pvr_psp2'
@@ -15,18 +14,18 @@ depends=(
 )
 
 prepare() {
-  cd "SDL-${gitrev}"
+  cd "SDL2-${pkgver}"
 }
 
 build() {
-  cd "SDL-${gitrev}"
+  cd "SDL2-${pkgver}"
   mkdir build && cd build
-  cmake .. -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake -DCMAKE_INSTALL_PREFIX=$prefix -DVIDEO_VITA_PVR=On
+  cmake .. -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake -DCMAKE_INSTALL_PREFIX=$prefix -DVIDEO_VITA_PVR=ON
   make -j$(nproc)
 }
 
 package () {
-  cd "SDL-${gitrev}"
+  cd "SDL2-${pkgver}"
   cd build
   make DESTDIR=$pkgdir install
 }
