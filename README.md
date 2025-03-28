@@ -10,6 +10,7 @@ All extra/staging/gray-area shit for ease of building/installing.
 * curl-mbedtls - curl built with mbedtls backend
 * curl-bearssl - curl built with bearssl backend
 * bearssl - bearssl ssl/tls library
+* libffi - libffi library
 
 # building/installing
 
