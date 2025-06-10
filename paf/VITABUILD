@@ -1,0 +1,69 @@
+pkgname=paf
+pkgver=9999
+pkgrel=1
+url='https://github.com/GrapheneCt/ScePaf-RE/'
+source=(
+  "https://github.com/GrapheneCt/ScePaf-RE/archive/refs/heads/main.tar.gz"
+  "https://github.com/isage/libemd/archive/refs/heads/master.tar.gz"
+  "https://raw.githubusercontent.com/Princess-of-Sleeping/vitasdk-paf-component/refs/heads/master/include/map"
+  "https://raw.githubusercontent.com/Princess-of-Sleeping/vitasdk-paf-component/refs/heads/master/include/math.h"
+  "vitasdk.patch"
+)
+
+sha256sums=(
+  SKIP
+  SKIP
+  SKIP
+  SKIP
+  "aa81f526194e50c0f44af22d1c07b24cc8027a51c618344a119e93c5c76209dd"
+)
+
+prepare () {
+    echo "aaa"
+
+    # build emd tool
+    cd libemd-master
+    cmake -Bbuild -DCMAKE_BUILD_TYPE=Release .
+    cmake --build build -t ngp-libgen
+
+    # patch includes
+    cd ..
+    cd ScePaf-RE-main
+    patch -p2 < "../vitasdk.patch"
+
+    # build stubs
+    cd lib
+    for i in *.emd
+    do
+        ../../libemd-master/build/ngp-libgen --vitasdk $i
+        ../../libemd-master/build/ngp-libgen --vitasdk --weak $i
+    done
+}
+
+
+package () {
+    echo "aaa"
+
+    cd ScePaf-RE-main
+
+    # install libs
+    cd lib
+    for i in *.a
+    do
+        install $i -D -t $pkgdir$prefix/lib -D 
+    done
+
+
+    # install headers
+    cd ..
+
+    find include/ -type f -exec install -Dm 755 "{}" "$pkgdir$prefix/{}" \;
+
+
+    # install overrides
+    cd ..
+
+    install math.h -D -t $pkgdir$prefix/include/paf/math/
+    install map -D  -t $pkgdir$prefix/include/paf/std/
+
+}
