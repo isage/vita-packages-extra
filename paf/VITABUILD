@@ -19,8 +19,7 @@ sha256sums=(
 )
 
 prepare () {
-    echo "aaa"
-
+    
     # build emd tool
     cd libemd-master
     cmake -Bbuild -DCMAKE_BUILD_TYPE=Release .
@@ -42,8 +41,7 @@ prepare () {
 
 
 package () {
-    echo "aaa"
-
+    
     cd ScePaf-RE-main
 
     # install libs
