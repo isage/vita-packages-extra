@@ -24,7 +24,7 @@ build() {
   cd "${pkgname}-src-${gitrev}"
   PATH="$VITASDK/arm-vita-eabi/bin:$PATH" \
   LIBS="-ljpeg -lpng -lwebp -lmikmod -lmpg123 -lmodplug -lFLAC -lopusfile -lopus -lvorbisfile -lvorbis -logg -pthread -lz -lstdc++ -lc -lm" \
-  ./configure --host=arm-vita-eabi --prefix=$prefix --without-pdo-sqlite --without-sqlite3 --disable-all --disable-cli --disable-cgi --without-pcre-jit --disable-phpdbg --enable-embed=static --with-sdl=${VITASDK}/arm-vita-eabi/bin/sdl2-config --without-pic --enable-sdl_mixer --enable-sdl_image
+  ./configure --host=arm-vita-eabi --prefix=$prefix --without-pdo-sqlite --without-sqlite3 --disable-all --disable-cli --disable-cgi --without-pcre-jit --disable-phpdbg --enable-embed=static --with-sdl=${VITASDK}/arm-vita-eabi/bin/sdl2-config --without-pic --enable-sdl_mixer=${VITASDK}/arm-vita-eabi/ --enable-sdl_image=${VITASDK}/arm-vita-eabi/
   make -j$(nproc)
 }
 
