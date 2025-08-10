@@ -10,7 +10,7 @@ sha256sums=(
   SKIP
 )
 depends=(
-    'sdl'
+    'sdl2'
     'sdl2_mixer'
     'sdl2_image'
 )
